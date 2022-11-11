@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Top_Movies.DetailsPage">
+    <Grid RowSpacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <WebView x:Name="videoView"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="FillAndExpand"
+                 HeightRequest="20"
+                 Source="">
+        </WebView>
+
+        <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Spacing="20" Margin="20,0">
+
+                <StackLayout Orientation="Horizontal" Spacing="200" >
+
+                    <Label x:Name="lblTitle" Text="Title" 
+                       TextColor="Black" 
+                       FontSize="18"
+                       FontAttributes="Bold"/>
+
+                    <Image x:Name="imgCircle"
+                           Source="" />
+
+                </StackLayout>
+
+                <Label x:Name="lblOverView" Text="OverView" 
+                            HorizontalOptions = "Center"
+                            FontSize = "18" 
+                            TextColor = "Black"/>
+
+
+                <StackLayout Orientation="Horizontal" Spacing="35" >
+                    <Label x:Name="lblDate" Text="Date" 
+                            HorizontalOptions = "Center"
+                            FontSize = "18" 
+                            TextColor = "Black"/>
+
+
+                    <Label x:Name="lblLanguage" Text="Title" 
+                            HorizontalOptions = "Center"
+                            FontSize = "18" 
+                            TextColor = "Black"/>
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal" Spacing="35" >
+                    <Label x:Name="lblPopularity" Text="Title" 
+                        HorizontalOptions = "Center"
+                        FontSize = "18" 
+                        TextColor = "Black"/>
+
+                    <Label x:Name="lblVoteCount" Text="Title" 
+                        HorizontalOptions = "Center"
+                        FontSize = "18" 
+                        TextColor = "Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="15" >
+                    <Label x:Name="lblVoteAverage" Text="Title" 
+                        HorizontalOptions = "Center"
+                        FontSize = "18" 
+                        TextColor = "Black"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

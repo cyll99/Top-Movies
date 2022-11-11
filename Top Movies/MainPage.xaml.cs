@@ -1,93 +1,89 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Top_Movies
 {
     public partial class MainPage : ContentPage
     {
-        public static int index = 0;
-        public static List<Film> listFilm;
-        Film currentFilm;
+        public SQLiteConnection conn;
+        private Image splashImage;
+        private List<Film> films;
         public MainPage()
         {
-            SqliteDataAccess.CreateIfNotExists();// create the database
-            //SqliteDataAccess.changeColor(Image1); // change the icon
-            // save the films in the datavase
-            if (Utilities.IsConnectedToInternet())
+            InitializeComponent();
+
+            GetListMovie();
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            var sub = new AbsoluteLayout();
+            splashImage = new Image
             {
-                listFilm = Utilities.getMovieDbList();
-                foreach (Film film in listFilm)
-                    SqliteDataAccess.SaveFilm(film);
+                Source = "letterf",
+                WidthRequest = 100,
+                HeightRequest = 100
+            };
+            AbsoluteLayout.SetLayoutFlags(splashImage,
+               AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(splashImage,
+             new Rectangle(0.5, 0.5, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+
+            sub.Children.Add(splashImage);
+
+            this.BackgroundColor = Color.FromHex("#2296f3");
+            this.Content = sub;
+        }
+
+        private void GetListMovie()
+        {
+            //var current = Connectivity.NetworkAccess;
+
+            if (Utilities.isConnectedToInternet())
+            {
+                try
+                {
+                    // Connection to internet is available
+                    films = Utilities.getMovieDbList();
+                    foreach (Film film in films)
+                    {
+                        MovieDatabase.SaveFilm(film);
+                    }
+                }
+                catch (Exception) { }
+
             }
             else
             {
-                listFilm = SqliteDataAccess.LoadFilms();//load film from database
+                try
+                {
+                    films = MovieDatabase.GetFilms();
+                }
+                catch (Exception) { }
             }
-
-            afficher(index);
-
         }
 
-        /// <summary>
-        /// display film from website or database
-        /// </summary>
-        /// <param name="index"></param>
-        public void afficher(int index)
+        protected override async void OnAppearing()
         {
+            try
+            {
+                base.OnAppearing();
+                await splashImage.ScaleTo(1, 2000); //Time-consuming processes such as initialization
+                await splashImage.ScaleTo(0.9, 1500, Easing.Linear);
+                await splashImage.ScaleTo(150, 1200, Easing.Linear);
+                Application.Current.MainPage = new NavigationPage(new FilmPage(films));    //After loading  MainPage it gets Navigated to our FilmPage
 
-
-            if (Utilities.IsConnectedToInternet())
-            {// films from api
-                //listFilm = Utilities.getMovieDbList();
-                currentFilm = listFilm.ElementAt(index);
-                //SqliteDataAccess.SaveFilm(film);
-
-                lbl_title.Text = currentFilm.title;
-                lbl_overview.Text = currentFilm.overview;
-                Iposter.Source = "https://image.tmdb.org/t/p/w342" + currentFilm.poster_path;
             }
-            else
-            {// films from database
-                listFilm = SqliteDataAccess.LoadFilms();
-                currentFilm = listFilm.ElementAt(index);
-                lbl_title.Text = currentFilm.title;
-                lbl_overview.Text = currentFilm.overview;
-                Iposter.Source = "data:image/jpeg;base64," + Convert.ToBase64String(currentFilm.byte_post);
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
-
-            if (index > 0)
-                btn_prece.IsEnabled = true;
-            else
-                btn_prece.IsEnabled = false;
-
-
-            if (index == 19)
-                btn_suiv.IsEnabled = false;
-            else
-                btn_suiv.IsEnabled = true;
-
-            
-
         }
 
-        private void btn_prece_Clicked(object sender, EventArgs e)
-        {
-            afficher(--index);
-        }
-
-        private void btn_suiv_Clicked(object sender, EventArgs e)
-        {
-            afficher(++index);
-        }
-
-        private async void Iposter_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new DetailPage());
-        }
     }
 }

@@ -1,0 +1,51 @@
+
+        /// <summary>
+        /// convert image from uri to byte
+        /// </summary>
+        /// <param name="backdrop"></param>
+        /// <param name="format"></param>
+        /// <returns>a list of byte</returns>
+        public static byte[] ImageToByte(string backdrop, System.Drawing.Imaging.ImageFormat format)
+        {
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead(backdrop);
+            // Bitmap bitmap; 
+            Image bitmap = new Bitmap(Image.FromStream(stream));
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Convert Image to byte[]
+                bitmap.Save(ms, format);
+                byte[] imageBytes = ms.ToArray();
+                return imageBytes;
+            }
+
+        }
+
+        /// <summary>
+        /// convert byte to image
+        /// </summary>
+        /// <param name="bytesArr"></param>
+        /// <returns>an image</returns>
+
+        public static Image byteArrayToImage(byte[] bytesArr)
+        {
+            using (MemoryStream memstr = new MemoryStream(bytesArr))
+            {
+                Image img = Image.FromStream(memstr);
+                return img;
+            }
+        }
+
+        /// <summary>
+        /// change the color of the icon if there is internet
+        /// </summary>
+        public static void changeColor(System.Web.UI.WebControls.Image Image1)
+        {
+            if (Utilities.IsConnectedToInternet())
+                Image1.ImageUrl = "~/ressources/blue.png";
+            else
+                Image1.ImageUrl = "~/ressources/red.png";
+        }
+
+    }
