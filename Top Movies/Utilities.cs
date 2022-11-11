@@ -19,7 +19,7 @@ namespace Top_Movies
         /// and return a list of movie
         /// </summary>
         /// <returns></returns>
-        public static List<Film> getMovieDbList(string siteLink)
+        public static List<Film> getMovieDbList()
         {
             String reponse = "";
             List<Film> Films = null;

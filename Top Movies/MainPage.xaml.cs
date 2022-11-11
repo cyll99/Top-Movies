@@ -42,9 +42,10 @@ namespace Top_Movies
 
         private void GetListMovie()
         {
-            //var current = Connectivity.NetworkAccess;
 
-            if (Utilities.isConnectedToInternet())
+            var current = Connectivity.NetworkAccess;
+
+            if (current == NetworkAccess.Internet)
             {
                 try
                 {
@@ -76,7 +77,7 @@ namespace Top_Movies
                 await splashImage.ScaleTo(1, 2000); //Time-consuming processes such as initialization
                 await splashImage.ScaleTo(0.9, 1500, Easing.Linear);
                 await splashImage.ScaleTo(150, 1200, Easing.Linear);
-                Application.Current.MainPage = new NavigationPage(new FilmPage(films));    //After loading  MainPage it gets Navigated to our FilmPage
+                Application.Current.MainPage = new NavigationPage(new FilmsPage(films));    //After loading  MainPage it gets Navigated to our FilmPage
 
             }
             catch (Exception e)
