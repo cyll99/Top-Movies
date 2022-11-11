@@ -113,12 +113,17 @@ namespace Top_Movies
         /// <param name="image"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        public static byte[] ImageToByte(Image image, System.Drawing.Imaging.ImageFormat format)
+        public static byte[] ImageToByte(string poster)
         {
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead(poster);
+            // Bitmap bitmap; 
+            Image bitmap = new Bitmap(Image.FromStream(stream));
+
             using (MemoryStream ms = new MemoryStream())
             {
-                //Convert Image to byte[]
-                image.Save(ms, format);
+                // Convert Image to byte[]
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                 byte[] imageBytes = ms.ToArray();
                 return imageBytes;
             }

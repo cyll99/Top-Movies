@@ -79,8 +79,10 @@ namespace Top_Movies
                     circleImgUrl = "circleRed.png";
                     try
                     {
-                        var stream1 = new MemoryStream(currentFilm.image);
-                        img.Source = ImageSource.FromStream(() => stream1);
+                        //var stream1 = new MemoryStream(currentFilm.image);
+                       var source = ImageSource.FromStream(() => new MemoryStream(currentFilm.image));
+                     
+                        img.Source = source;
                     }
                     catch (Exception)
                     {

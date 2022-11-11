@@ -12,7 +12,7 @@ namespace Top_Movies
         public static SQLiteConnection Connection()
         {
             String libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var path = Path.Combine(libraryPath, "film.db3");
+            var path = Path.Combine(libraryPath, "movie1.db3");
 
             SQLiteConnection connection = new SQLiteConnection(path);
             connection.CreateTable<Film>();
@@ -24,6 +24,8 @@ namespace Top_Movies
         {
             if (!GetFilmID().Contains(film.id))
             {
+                var poster = "https://image.tmdb.org/t/p/w342" + film.poster_path;
+                film.image = Utilities.ImageToByte(poster);
                 Connection().Insert(film);
             }
         }
@@ -36,6 +38,7 @@ namespace Top_Movies
 
             foreach (Film film in films)
             {
+
                 listMovie.Add(film);
             }
             return listMovie;
