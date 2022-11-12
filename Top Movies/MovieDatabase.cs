@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 
 namespace Top_Movies
-{/// <summary>
-/// Christ-Yan Love Larose
-/// </summary>
+{
     public class MovieDatabase
     {
         /// <summary>

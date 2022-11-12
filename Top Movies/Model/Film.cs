@@ -5,9 +5,7 @@ using System.Text;
 
 namespace Top_Movies
 {
-    /// <summary>
-    /// Christ-Yan Love Larose
-    /// </summary>
+   
     public class Film
     {
         public Film() { }

@@ -11,9 +11,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Top_Movies
 {
-    /// <summary>
-    /// Christ-Yan Love Larose
-    /// </summary>
+   
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FilmsPage : ContentPage
     {
