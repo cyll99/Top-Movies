@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="DetailsPage.xaml">
+    <EmbeddedResource Update="Pages\DetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="FilmsPage.xaml">
+    <EmbeddedResource Update="Pages\FilmsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
