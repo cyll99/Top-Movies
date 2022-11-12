@@ -9,6 +9,9 @@ using System.Text.Json;
 
 namespace Top_Movies
 {
+    /// <summary>
+    /// Christ-Yan Love Larose
+    /// </summary>
     public static class Utilities
     {
         private static string siteLink = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
@@ -44,7 +47,12 @@ namespace Top_Movies
             return Films;
         }
 
-
+        /// <summary>
+        /// get the youtube key for videos
+        /// </summary>
+        /// <param name="VIDEO_URL"></param>
+        /// <param name="currentFilm"></param>
+        /// <returns></returns>
         public static String getYoutubeKey(string VIDEO_URL, Film currentFilm)
         {
             String reponse = "";
@@ -107,42 +115,9 @@ namespace Top_Movies
         }
 
 
-        /// <summary>
-        /// This method convert the image to byte
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="format"></param>
-        /// <returns></returns>
-        public static byte[] ImageToByte(string poster)
-        {
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead(poster);
-            // Bitmap bitmap; 
-            Image bitmap = new Bitmap(Image.FromStream(stream));
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                // Convert Image to byte[]
-                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                byte[] imageBytes = ms.ToArray();
-                return imageBytes;
-            }
-        }
+      
 
 
-        /// <summary>
-        /// This method convert the bytes to Base64ToImage(string base64String)
-        /// </summary>
-        /// <param name="imageBytes"></param>
-        /// <returns></returns>
-        public static Image ByteToImage(byte[] imageBytes)
-        {
-            //Convert byte[] to Image
-            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-            ms.Write(imageBytes, 0, imageBytes.Length);
-            Image image = new Bitmap(ms);
-            return image;
-        }
-
+   
     }
 }

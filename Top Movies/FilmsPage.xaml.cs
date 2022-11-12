@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace Top_Movies
 {
+    /// <summary>
+    /// Christ-Yan Love Larose
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FilmsPage : ContentPage
     {
@@ -66,23 +70,24 @@ namespace Top_Movies
                 lblTitle.Text = currentFilm.title;
                 lblOverview.Text = currentFilm.overview;
 
-                String circleImgUrl = "";
+               
                 var current = Connectivity.NetworkAccess;
 
                 if (current == NetworkAccess.Internet)
                 {
+                    imgCircle.BackgroundColor = Color.Blue;
+
                     img.Source = "https://image.tmdb.org/t/p/w342" + currentFilm.backdrop_path;
-                    circleImgUrl = "circleBlue.png";
+
+                   
                 }
                 else
                 {
-                    circleImgUrl = "circleRed.png";
+                    imgCircle.BackgroundColor = Color.Red;
                     try
                     {
-                        //var stream1 = new MemoryStream(currentFilm.image);
-                       var source = ImageSource.FromStream(() => new MemoryStream(currentFilm.image));
-                     
-                        img.Source = source;
+                        img.Source = "https://image.tmdb.org/t/p/w342" + currentFilm.backdrop_path;
+
                     }
                     catch (Exception)
                     {
@@ -90,7 +95,6 @@ namespace Top_Movies
                     }
                 }
 
-                imgCircle.Source = circleImgUrl;
             }
             catch (Exception) { }
 

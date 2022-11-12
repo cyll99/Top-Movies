@@ -10,6 +10,9 @@ using Xamarin.Forms;
 
 namespace Top_Movies
 {
+    /// <summary>
+    /// Christ-Yan Love Larose
+    /// </summary>
     public partial class MainPage : ContentPage
     {
         public SQLiteConnection conn;
@@ -64,6 +67,7 @@ namespace Top_Movies
                 try
                 {
                     films = MovieDatabase.GetFilms();
+                    
                 }
                 catch (Exception) { }
             }

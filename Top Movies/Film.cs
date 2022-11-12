@@ -5,10 +5,12 @@ using System.Text;
 
 namespace Top_Movies
 {
+    /// <summary>
+    /// Christ-Yan Love Larose
+    /// </summary>
     public class Film
     {
         public Film() { }
-
         [PrimaryKey]
         public int id { get; set; }
         public String original_title { get; set; }
@@ -21,7 +23,7 @@ namespace Top_Movies
         public bool video { get; set; }
         public float vote_average { get; set; }
         public int vote_count { get; set; }
-        public byte[] image { get; set; }
+        public string image { get; set; }
 
         private string adult { get; set; }
         public String backdrop_path { get; set; }
@@ -29,6 +31,9 @@ namespace Top_Movies
         private List<int> _genre_ids;
         public List<int> genre_ids() { return _genre_ids; }
         public void Setgenre_ids(List<int> value) { _genre_ids = value; }
+
+
+     
 
 
     }
